@@ -9,3 +9,13 @@ final case class Identifications(breachEncapsulationOfValue: Seq[Identification]
     breachEncapsulationOfValue.exists(f)
 
 }
+
+object Identifications {
+
+  val empty: Identifications = apply(Seq.empty)
+
+  def apply(values: Seq[Identification]): Identifications = new Identifications(values)
+
+  def fromValues(values: Identification*): Identifications = new Identifications(values.toSeq)
+
+}

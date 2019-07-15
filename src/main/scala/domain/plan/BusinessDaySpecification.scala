@@ -8,7 +8,7 @@ import enumeratum._
 sealed trait BusinessDaySpecification extends Specification[LocalDateTime] with EnumEntry
 
 object BusinessDaySpecification extends Enum[BusinessDaySpecification] {
-  override def values: IndexedSeq[BusinessDaySpecification] = findValues
+  override def values = findValues
 
   case object Weekday extends BusinessDaySpecification {
     override def isSatisfiedBy(localDateTime: LocalDateTime): Boolean =

@@ -8,7 +8,7 @@ final case class Plans(breachEncapsulationOfValue: Seq[Plan]) {
 
   def filterByLocalDateTime(localDateTime: LocalDateTime): Plans =
     copy(breachEncapsulationOfValue.filter { plan =>
-      val spec = plan.moviePriceSpec
+      val spec = plan.planSpec
       spec.businessDayWithLateSpec
         .fold(false)(_.isSatisfiedBy(localDateTime)) || spec.movieDaySpec.fold(false)(
         _.isSatisfiedBy(localDateTime.toLocalDate)
@@ -19,7 +19,7 @@ final case class Plans(breachEncapsulationOfValue: Seq[Plan]) {
     copy(breachEncapsulationOfValue.sortBy(_.price.amount))
 
   def findByCustomer(customer: Customer, localDateTime: LocalDateTime): Option[Plan] =
-    breachEncapsulationOfValue.find(_.moviePriceSpec.isSatisfiedBy(PlanCondition(customer, localDateTime)))
+    breachEncapsulationOfValue.find(_.planSpec.isSatisfiedBy(PlanCondition(customer, localDateTime)))
 
   def combine(other: Plans): Plans =
     copy(breachEncapsulationOfValue ++ other.breachEncapsulationOfValue)
@@ -34,6 +34,7 @@ object Plans {
   object WeekdayNotLatePlans {
 
     val cinemaCitizenPlan = Plan(
+      PlanName.CinemaCitizen,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizen,
@@ -43,6 +44,7 @@ object Plans {
     )
 
     val cinemaCitizenSeniorPlan = Plan(
+      PlanName.CinemaCitizenSenior,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizenSenior,
@@ -52,6 +54,7 @@ object Plans {
     )
 
     val generalPlan = Plan(
+      PlanName.General,
       Price(1800),
       PlanSpecification(
         customerSpecs = CustomerSpecification.General,
@@ -61,6 +64,7 @@ object Plans {
     )
 
     val seniorPlan = Plan(
+      PlanName.Senior,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Senior,
@@ -70,6 +74,7 @@ object Plans {
     )
 
     val universityStudentPlan = Plan(
+      PlanName.UniversityStudent,
       Price(1500),
       PlanSpecification(
         customerSpecs = CustomerSpecification.UniversityStudent,
@@ -79,6 +84,7 @@ object Plans {
     )
 
     val highSchoolStudentPlan = Plan(
+      PlanName.HighSchoolStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.HighSchoolStudent,
@@ -88,6 +94,7 @@ object Plans {
     )
 
     val elementarySchoolStudentAndUnder5YearsOldPlan = Plan(
+      PlanName.ElementarySchoolStudentAndUnder5YearsOld,
       Price(1000),
       PlanSpecification(
         customerSpecs =
@@ -98,6 +105,7 @@ object Plans {
     )
 
     val disabilityUniversityStudentPlan = Plan(
+      PlanName.DisabilityUniversityStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Disability and CustomerSpecification.UniversityStudent,
@@ -107,6 +115,7 @@ object Plans {
     )
 
     val disabilityUnderHighSchoolStudentPlan = Plan(
+      PlanName.DisabilityUnderHighSchoolStudent,
       Price(900),
       PlanSpecification(
         CustomerSpecification.Disability and (CustomerSpecification.HighSchoolStudent or CustomerSpecification.ElementarySchoolStudent),
@@ -134,6 +143,7 @@ object Plans {
   object WeekdayLatePlans {
 
     val cinemaCitizenPlan = Plan(
+      PlanName.CinemaCitizen,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizen,
@@ -143,6 +153,7 @@ object Plans {
     )
 
     val cinemaCitizenSeniorPlan = Plan(
+      PlanName.CinemaCitizenSenior,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizenSenior,
@@ -152,6 +163,7 @@ object Plans {
     )
 
     val generalPlan = Plan(
+      PlanName.General,
       Price(1300),
       PlanSpecification(
         customerSpecs = CustomerSpecification.General,
@@ -161,6 +173,7 @@ object Plans {
     )
 
     val seniorPlan = Plan(
+      PlanName.Senior,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Senior,
@@ -170,6 +183,7 @@ object Plans {
     )
 
     val universityStudentPlan = Plan(
+      PlanName.UniversityStudent,
       Price(1300),
       PlanSpecification(
         customerSpecs = CustomerSpecification.UniversityStudent,
@@ -179,6 +193,7 @@ object Plans {
     )
 
     val highSchoolStudentPlan = Plan(
+      PlanName.HighSchoolStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.HighSchoolStudent,
@@ -188,6 +203,7 @@ object Plans {
     )
 
     val elementarySchoolStudentAndUnder5YearsOldPlan = Plan(
+      PlanName.ElementarySchoolStudentAndUnder5YearsOld,
       Price(1000),
       PlanSpecification(
         customerSpecs =
@@ -198,6 +214,7 @@ object Plans {
     )
 
     val disabilityUniversityStudentPlan = Plan(
+      PlanName.DisabilityUniversityStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Disability and CustomerSpecification.UniversityStudent,
@@ -207,6 +224,7 @@ object Plans {
     )
 
     val disabilityUnderHighSchoolStudentPlan = Plan(
+      PlanName.DisabilityUnderHighSchoolStudent,
       Price(900),
       PlanSpecification(
         CustomerSpecification.Disability and (CustomerSpecification.HighSchoolStudent or CustomerSpecification.ElementarySchoolStudent),
@@ -234,6 +252,7 @@ object Plans {
   object HolidayNotLatePlans {
 
     val cinemaCitizenPlan = Plan(
+      PlanName.CinemaCitizen,
       Price(1300),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizen,
@@ -243,6 +262,7 @@ object Plans {
     )
 
     val cinemaCitizenSeniorPlan = Plan(
+      PlanName.CinemaCitizenSenior,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizenSenior,
@@ -252,6 +272,7 @@ object Plans {
     )
 
     val generalPlan = Plan(
+      PlanName.General,
       Price(1800),
       PlanSpecification(
         customerSpecs = CustomerSpecification.General,
@@ -261,6 +282,7 @@ object Plans {
     )
 
     val seniorPlan = Plan(
+      PlanName.Senior,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Senior,
@@ -270,6 +292,7 @@ object Plans {
     )
 
     val universityStudentPlan = Plan(
+      PlanName.UniversityStudent,
       Price(1500),
       PlanSpecification(
         customerSpecs = CustomerSpecification.UniversityStudent,
@@ -279,6 +302,7 @@ object Plans {
     )
 
     val highSchoolStudentPlan = Plan(
+      PlanName.HighSchoolStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.HighSchoolStudent,
@@ -288,16 +312,18 @@ object Plans {
     )
 
     val elementarySchoolStudentAndUnder5YearsOldPlan = Plan(
+      PlanName.ElementarySchoolStudentAndUnder5YearsOld,
       Price(1000),
       PlanSpecification(
         customerSpecs =
-          CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
+          CustomerSpecification.ElementarySchoolStudent or CustomerSpecification.Under5YearsOld,
         businessDayWithLateSpec = Some(BusinessDaySpecification.Holiday and !lateSpec),
         movieDaySpec = None
       )
     )
 
     val disabilityUniversityStudentPlan = Plan(
+      PlanName.DisabilityUniversityStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Disability and CustomerSpecification.UniversityStudent,
@@ -307,6 +333,7 @@ object Plans {
     )
 
     val disabilityUnderHighSchoolStudentPlan = Plan(
+      PlanName.DisabilityUnderHighSchoolStudent,
       Price(900),
       PlanSpecification(
         CustomerSpecification.Disability and (CustomerSpecification.HighSchoolStudent or CustomerSpecification.ElementarySchoolStudent),
@@ -334,6 +361,7 @@ object Plans {
   object HolidayLatePlans {
 
     val cinemaCitizenPlan = Plan(
+      PlanName.CinemaCitizen,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizen,
@@ -343,6 +371,7 @@ object Plans {
     )
 
     val cinemaCitizenSeniorPlan = Plan(
+      PlanName.CinemaCitizenSenior,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizenSenior,
@@ -352,6 +381,7 @@ object Plans {
     )
 
     val generalPlan = Plan(
+      PlanName.General,
       Price(1300),
       PlanSpecification(
         customerSpecs = CustomerSpecification.General,
@@ -361,6 +391,7 @@ object Plans {
     )
 
     val seniorPlan = Plan(
+      PlanName.Senior,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Senior,
@@ -370,6 +401,7 @@ object Plans {
     )
 
     val universityStudentPlan = Plan(
+      PlanName.UniversityStudent,
       Price(1300),
       PlanSpecification(
         customerSpecs = CustomerSpecification.UniversityStudent,
@@ -379,6 +411,7 @@ object Plans {
     )
 
     val highSchoolStudentPlan = Plan(
+      PlanName.HighSchoolStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.HighSchoolStudent,
@@ -388,6 +421,7 @@ object Plans {
     )
 
     val elementarySchoolStudentAndUnder5YearsOldPlan = Plan(
+      PlanName.ElementarySchoolStudentAndUnder5YearsOld,
       Price(1000),
       PlanSpecification(
         customerSpecs =
@@ -398,6 +432,7 @@ object Plans {
     )
 
     val disabilityUniversityStudentPlan = Plan(
+      PlanName.DisabilityUniversityStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Disability and CustomerSpecification.UniversityStudent,
@@ -407,6 +442,7 @@ object Plans {
     )
 
     val disabilityUnderHighSchoolStudentPlan = Plan(
+      PlanName.DisabilityUnderHighSchoolStudent,
       Price(900),
       PlanSpecification(
         CustomerSpecification.Disability and (CustomerSpecification.HighSchoolStudent or CustomerSpecification.ElementarySchoolStudent),
@@ -434,6 +470,7 @@ object Plans {
   object MovieDayPlans {
 
     val cinemaCitizenPlan = Plan(
+      PlanName.CinemaCitizen,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizen,
@@ -443,6 +480,7 @@ object Plans {
     )
 
     val cinemaCitizenSeniorPlan = Plan(
+      PlanName.CinemaCitizenSenior,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.CinemaCitizenSenior,
@@ -452,6 +490,7 @@ object Plans {
     )
 
     val generalPlan = Plan(
+      PlanName.General,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.General,
@@ -461,6 +500,7 @@ object Plans {
     )
 
     val seniorPlan = Plan(
+      PlanName.Senior,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Senior,
@@ -470,6 +510,7 @@ object Plans {
     )
 
     val universityStudentPlan = Plan(
+      PlanName.UniversityStudent,
       Price(1100),
       PlanSpecification(
         customerSpecs = CustomerSpecification.UniversityStudent,
@@ -479,6 +520,7 @@ object Plans {
     )
 
     val highSchoolStudentPlan = Plan(
+      PlanName.HighSchoolStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.HighSchoolStudent,
@@ -488,6 +530,7 @@ object Plans {
     )
 
     val elementarySchoolStudentAndUnder5YearsOldPlan = Plan(
+      PlanName.ElementarySchoolStudentAndUnder5YearsOld,
       Price(1000),
       PlanSpecification(
         customerSpecs =
@@ -498,6 +541,7 @@ object Plans {
     )
 
     val disabilityUniversityStudentPlan = Plan(
+      PlanName.DisabilityUniversityStudent,
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Disability and CustomerSpecification.UniversityStudent,
@@ -507,6 +551,7 @@ object Plans {
     )
 
     val disabilityUnderHighSchoolStudentPlan = Plan(
+      PlanName.DisabilityUnderHighSchoolStudent,
       Price(900),
       PlanSpecification(
         CustomerSpecification.Disability and (CustomerSpecification.HighSchoolStudent or CustomerSpecification.ElementarySchoolStudent),

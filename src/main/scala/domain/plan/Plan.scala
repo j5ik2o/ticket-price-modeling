@@ -1,3 +1,3 @@
 package domain.plan
 
-final case class Plan(price: Price, moviePriceSpec: PlanSpecification)
+final case class Plan(name: PlanName, price: Price, planSpec: PlanSpecification)
