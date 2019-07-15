@@ -98,7 +98,7 @@ object Plans {
       Price(1000),
       PlanSpecification(
         customerSpecs =
-          CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
+        CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
         businessDayWithLateSpec = Some(BusinessDaySpecification.Weekday and !lateSpec),
         movieDaySpec = None
       )
@@ -207,7 +207,7 @@ object Plans {
       Price(1000),
       PlanSpecification(
         customerSpecs =
-          CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
+        CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
         businessDayWithLateSpec = Some(BusinessDaySpecification.Weekday and lateSpec),
         movieDaySpec = None
       )
@@ -218,7 +218,7 @@ object Plans {
       Price(1000),
       PlanSpecification(
         customerSpecs = CustomerSpecification.Disability and CustomerSpecification.UniversityStudent,
-        businessDayWithLateSpec = Some(BusinessDaySpecification.Weekday and !lateSpec),
+        businessDayWithLateSpec = Some(BusinessDaySpecification.Weekday and lateSpec),
         movieDaySpec = None
       )
     )
@@ -316,7 +316,7 @@ object Plans {
       Price(1000),
       PlanSpecification(
         customerSpecs =
-          CustomerSpecification.ElementarySchoolStudent or CustomerSpecification.Under5YearsOld,
+        CustomerSpecification.ElementarySchoolStudent or CustomerSpecification.Under5YearsOld,
         businessDayWithLateSpec = Some(BusinessDaySpecification.Holiday and !lateSpec),
         movieDaySpec = None
       )
@@ -425,7 +425,7 @@ object Plans {
       Price(1000),
       PlanSpecification(
         customerSpecs =
-          CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
+        CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
         businessDayWithLateSpec = Some(BusinessDaySpecification.Holiday and lateSpec),
         movieDaySpec = None
       )
@@ -534,7 +534,7 @@ object Plans {
       Price(1000),
       PlanSpecification(
         customerSpecs =
-          CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
+        CustomerSpecification.ElementarySchoolStudent and CustomerSpecification.Under5YearsOld,
         businessDayWithLateSpec = None,
         movieDaySpec = Some(MovieDaySpecification)
       )
@@ -576,6 +576,7 @@ object Plans {
       )
   }
 
-  val all: Plans = WeekdayNotLatePlans.all ++ WeekdayLatePlans.all ++ HolidayNotLatePlans.all ++ HolidayLatePlans.all ++ MovieDayPlans.all
+  val all
+    : Plans = WeekdayNotLatePlans.all ++ WeekdayLatePlans.all ++ HolidayNotLatePlans.all ++ HolidayLatePlans.all ++ MovieDayPlans.all
 
 }
