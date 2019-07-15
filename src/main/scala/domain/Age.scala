@@ -21,6 +21,7 @@ object Age {
   def apply(value: Int): Age = StaticAge(value)
 
   private final case class StaticAge(value: Int) extends Age {
+    require(0 < value)
     override def breachEncapsulationOfValue(today: LocalDate): Int = value
   }
 
