@@ -3,12 +3,10 @@ package domain.plan
 import java.time.LocalDate
 
 import domain.support.Specification
-import domain.{Age, Customer, Identification}
+import domain.{ Age, Customer, Identification }
 import enumeratum._
 
-sealed trait CustomerSpecification
-    extends Specification[Customer]
-    with EnumEntry
+sealed trait CustomerSpecification extends Specification[Customer] with EnumEntry
 
 object CustomerSpecification extends Enum[CustomerSpecification] {
   override def values: IndexedSeq[CustomerSpecification] = findValues

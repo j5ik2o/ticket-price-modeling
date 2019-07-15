@@ -1,6 +1,6 @@
 package domain.plan
 
-import java.time.{LocalDate, LocalDateTime}
+import java.time.{ LocalDate, LocalDateTime }
 
 import domain.Customer
 import domain.support.Specification
@@ -8,8 +8,8 @@ import domain.support.Specification
 final case class PlanSpecification(
     customerSpecs: Specification[Customer],
     businessDayWithLateSpec: Option[Specification[LocalDateTime]],
-    movieDaySpec: Option[Specification[LocalDate]])
-    extends Specification[PlanCondition] {
+    movieDaySpec: Option[Specification[LocalDate]]
+) extends Specification[PlanCondition] {
   (businessDayWithLateSpec, movieDaySpec) match {
     case (Some(_), Some(_)) =>
       throw new IllegalArgumentException

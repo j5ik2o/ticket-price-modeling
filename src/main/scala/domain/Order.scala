@@ -2,7 +2,7 @@ package domain
 
 import java.time.LocalDateTime
 
-import domain.plan.{Plans, Price}
+import domain.plan.{ Plans, Price }
 
 final case class Order(customer: Customer, orderedAt: LocalDateTime) {
 
