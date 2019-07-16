@@ -40,11 +40,32 @@ object Plans {
     )
     // ...  
   }
+  // ...
 }
 ```
 
 - 安い料金から検索する
 
+```scala
+final case class Plans(breachEncapsulationOfValue: Seq[Plan]) {
+
+  def filterByLocalDateTime(localDateTime: LocalDateTime): Plans =
+    copy(breachEncapsulationOfValue.filter { plan =>
+      val spec = plan.planSpec
+      spec.businessDayWithLateSpec
+        .fold(false)(_.isSatisfiedBy(localDateTime)) || spec.movieDaySpec.fold(false)(
+        _.isSatisfiedBy(localDateTime.toLocalDate)
+      )
+    })
+
+  def lowestPriceOrder: Plans =
+    copy(breachEncapsulationOfValue.sortBy(_.price.amount))
+
+  def findByCustomer(customer: Customer, localDateTime: LocalDateTime): Option[Plan] =
+    breachEncapsulationOfValue.find(_.planSpec.isSatisfiedBy(PlanCondition(customer, localDateTime)))
+    
+}
+```
 
 
 ## 他の方のリポジトリ
