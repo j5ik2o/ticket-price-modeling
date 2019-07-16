@@ -67,6 +67,18 @@ final case class Plans(breachEncapsulationOfValue: Seq[Plan]) {
 }
 ```
 
+```scala
+final case class Order(customer: Customer, orderedAt: LocalDateTime) {
+
+  def plan: Option[Plan] = {
+    Plans.all.lowestPriceOrder
+      .filterByLocalDateTime(orderedAt)
+      .findByCustomer(customer, orderedAt)
+  }
+
+}
+```
+
 
 ## 他の方のリポジトリ
 
