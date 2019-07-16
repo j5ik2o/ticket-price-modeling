@@ -15,6 +15,38 @@ https://cinemacity.co.jp/ticket/
 - ※3D作品は一律プラス400円。3Dメガネ（Real D）持参の場合は、100円引き。
 - ※【極上爆音上映】はレイトショー割適用外です。
 
+## 本質的な部分
+
+- 料金決定の条件をどう宣言的に記述できるか？
+
+複雑な条件をそのままコード化すると、ビジネスルールを明示的な概念として捉えづらいため、仕様パターン(Specification)を採用した。
+プラン仕様(PlanSpecification)を使うと、映画のプランを決定するための条件を宣言的に記述できるようになる。PlanSpecificationには顧客仕様CustomerSpecification)と営業日(レイト)仕様(BusinessDaySpecification, LateSpec)などの仕様を内包して、複雑な概念をシンプルに扱えるようにする。
+
+```
+object Plans {
+
+  val lateSpec = LateSpecification(20)
+
+  object WeekdayNotLatePlans {
+
+    val cinemaCitizenPlan = Plan(
+      PlanName.CinemaCitizen,
+      Price(1000),
+      PlanSpecification(
+        customerSpecs = CustomerSpecification.CinemaCitizen,
+        businessDayWithLateSpec = Some(BusinessDaySpecification.Weekday and !lateSpec),
+        movieDaySpec = None
+      )
+    )
+    // ...  
+  }
+}
+```
+
+- 安い料金から検索する
+
+
+
 ## 他の方のリポジトリ
 
 - https://github.com/okunokentaro/ddd-ticket-price/
