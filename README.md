@@ -22,7 +22,7 @@ https://cinemacity.co.jp/ticket/
 複雑な条件をそのままコード化すると、ビジネスルールを明示的な概念として捉えづらいため、仕様パターン(Specification)を採用した。
 プラン仕様(PlanSpecification)を使うと、映画のプランを決定するための条件を宣言的に記述できるようになる。PlanSpecificationには顧客仕様CustomerSpecification)と営業日(レイト)仕様(BusinessDaySpecification, LateSpec)などの仕様を内包して、複雑な概念をシンプルに扱えるようにする。
 
-```
+```scala
 object Plans {
 
   val lateSpec = LateSpecification(20)
