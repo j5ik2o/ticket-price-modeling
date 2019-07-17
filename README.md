@@ -82,7 +82,7 @@ final case class Order(customer: Customer, orderedAt: LocalDateTime) {
 ```
 
 
-## 他の方のリポジトリ
+## 他の方の実装コード
 
 - Elm
     - https://github.com/IzumiSy/ticket_price
