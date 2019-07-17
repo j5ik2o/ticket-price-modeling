@@ -84,11 +84,19 @@ final case class Order(customer: Customer, orderedAt: LocalDateTime) {
 
 ## 他の方のリポジトリ
 
-- https://github.com/okunokentaro/ddd-ticket-price/
-- https://github.com/44x1carbon/Ticket-Price-Modeling-Challenge
-- https://github.com/windymelt/ticket-modelling-challenge
-- https://github.com/IzumiSy/ticket_price
-- https://github.com/taisukeoe/TicketModellingChallenge
-- https://github.com/hiroyuki-endo/ticket-price-modeling
-- https://gist.github.com/akehoyayoi/a65e4b9f2aaac264eceade8622fa89e8
-- https://github.com/deftfitf/TicketFee
+- Elm
+    - https://github.com/IzumiSy/ticket_price
+- Java
+    - https://github.com/hiroyuki-endo/ticket-price-modeling
+- Kotlin
+    - https://github.com/44x1carbon/Ticket-Price-Modeling-Challenge
+- Lisp
+    - https://github.com/windymelt/ticket-modelling-challenge
+- Scala
+    - https://github.com/taisukeoe/TicketModellingChallenge
+    - https://gist.github.com/akehoyayoi/a65e4b9f2aaac264eceade8622fa89e8
+    - https://github.com/deftfitf/TicketFee
+- TypeScript
+    - https://github.com/okunokentaro/ddd-ticket-price/
+
+
