@@ -99,6 +99,7 @@ final case class Order(customer: Customer, orderedAt: LocalDateTime) {
     - https://github.com/taisukeoe/TicketModellingChallenge
     - https://gist.github.com/akehoyayoi/a65e4b9f2aaac264eceade8622fa89e8
     - https://github.com/deftfitf/TicketFee
+    - https://github.com/BambooTuna/cinema-ticket-modelling
 - TypeScript
     - https://github.com/okunokentaro/ddd-ticket-price/
 
