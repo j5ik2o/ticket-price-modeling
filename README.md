@@ -86,6 +86,8 @@ final case class Order(customer: Customer, orderedAt: LocalDateTime) {
 
 - Elm
     - https://github.com/IzumiSy/ticket_price
+- Go
+    - https://github.com/yamakii/ticket-price-modeling
 - Java
     - https://github.com/hiroyuki-endo/ticket-price-modeling
     - https://hackmd.io/@little-hands/tickt-price-modeling
