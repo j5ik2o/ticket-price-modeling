@@ -97,6 +97,7 @@ final case class Order(customer: Customer, orderedAt: LocalDateTime) {
     - https://github.com/windymelt/ticket-modelling-challenge
 - PHP
     - https://github.com/ngmy/ticket-price-modeling
+    - https://github.com/choco14t/movie-ticket-fee
 - Scala
     - https://github.com/taisukeoe/TicketModellingChallenge
     - https://gist.github.com/akehoyayoi/a65e4b9f2aaac264eceade8622fa89e8
