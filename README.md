@@ -108,6 +108,7 @@ final case class Order(customer: Customer, orderedAt: LocalDateTime) {
     - https://github.com/ataka/ccity
 - TypeScript
     - https://github.com/okunokentaro/ddd-ticket-price
+    - https://github.com/hiroaki-suzuki/ticket-price-modeling-challenge
 - Rust
     - https://github.com/ikenox/movie-ticket-domain-modeling
 - モデル図
