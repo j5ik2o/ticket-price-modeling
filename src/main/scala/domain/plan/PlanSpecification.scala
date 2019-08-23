@@ -18,10 +18,10 @@ final case class PlanSpecification(
     case _ =>
   }
   override def isSatisfiedBy(arg: PlanCondition): Boolean = {
-    customerSpecs.isSatisfiedBy(arg.customer) &&
-    businessDayWithLateSpec.fold(true)(_.isSatisfiedBy(arg.localDateTime)) &&
+    customerSpecs.isSatisfiedBy(arg.breachEncapsulationOfCustomer) &&
+    businessDayWithLateSpec.fold(true)(_.isSatisfiedBy(arg.breachEncapsulationOfLocalDateTime)) &&
     movieDaySpec
-      .fold(true)(_.isSatisfiedBy(arg.localDateTime.toLocalDate))
+      .fold(true)(_.isSatisfiedBy(arg.breachEncapsulationOfLocalDateTime.toLocalDate))
   }
 
 }

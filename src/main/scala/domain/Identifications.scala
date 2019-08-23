@@ -1,12 +1,14 @@
 package domain
 
-final case class Identifications(breachEncapsulationOfValue: Seq[Identification]) {
+final case class Identifications(private val value: Seq[Identification]) {
 
   def contains(identification: Identification): Boolean =
-    breachEncapsulationOfValue.contains(identification)
+    value.contains(identification)
 
   def exists(f: Identification => Boolean): Boolean =
-    breachEncapsulationOfValue.exists(f)
+    value.exists(f)
+
+  def breachEncapsulationOfValue: Seq[Identification] = value
 
 }
 
