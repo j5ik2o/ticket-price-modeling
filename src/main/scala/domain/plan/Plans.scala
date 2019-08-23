@@ -4,11 +4,11 @@ import java.time.LocalDateTime
 
 import domain.Customer
 
-final case class Plans(breachEncapsulationOfValue: Seq[Plan]) {
+final case class Plans(private val values: Seq[Plan]) {
 
   def filterByLocalDateTime(localDateTime: LocalDateTime): Plans =
-    copy(breachEncapsulationOfValue.filter { plan =>
-      val spec = plan.planSpec
+    copy(values.filter { plan =>
+      val spec = plan.breachEncapsulationOfSpec
       spec.businessDayWithLateSpec
         .fold(false)(_.isSatisfiedBy(localDateTime)) || spec.movieDaySpec.fold(false)(
         _.isSatisfiedBy(localDateTime.toLocalDate)
@@ -16,15 +16,17 @@ final case class Plans(breachEncapsulationOfValue: Seq[Plan]) {
     })
 
   def lowestPriceOrder: Plans =
-    copy(breachEncapsulationOfValue.sortBy(_.price.amount))
+    copy(values.sortBy(_.breachEncapsulationOfPrice.breachEncapsulationOfAmount))
 
   def findByCustomer(customer: Customer, localDateTime: LocalDateTime): Option[Plan] =
-    breachEncapsulationOfValue.find(_.planSpec.isSatisfiedBy(PlanCondition(customer, localDateTime)))
+    values.find(_.isSatisfiedBy(PlanCondition(customer, localDateTime)))
 
   def combine(other: Plans): Plans =
-    copy(breachEncapsulationOfValue ++ other.breachEncapsulationOfValue)
+    copy(values ++ other.values)
 
   def ++(other: Plans): Plans = combine(other)
+
+  def breachEncapsulationOfValues: Seq[Plan] = values
 }
 
 object Plans {
